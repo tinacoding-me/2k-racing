@@ -32,12 +32,14 @@ scripts/
   prepare-media.py     Script tạo ảnh WebP (cần Python + Pillow)
 src/
   components/
-    layout/            Header, Footer, menu mobile, nút liên hệ
+    layout/            Header, BrandRail, Footer, menu mobile, nút liên hệ
     sections/          Hero, HeroMedia, BrandMarquee, Services, About, Showcase, News, Contact, VideoPlayer
     ui/                Icon SVG, SectionHeading, Modal
   data/content.ts      Thông tin cửa hàng, dịch vụ, phụ tùng, bài viết, gallery
+  hooks/               Trạng thái header và section đang xem
   styles/index.css     Tokens, các section, responsive, reduced motion
   styles/theme.css     Bảng màu trắng – đỏ – đen của toàn trang
+  styles/hero.css      Hero toàn màn hình, header trong suốt/thu gọn, chữ dọc
   App.tsx              Ghép trang và điều phối modal
   main.tsx             React entry point
 ```
@@ -54,7 +56,8 @@ src/
 
 ## Các tương tác
 
-- Header sticky, đánh dấu section đang xem và menu mobile xổ xuống ngay dưới navbar. Menu đóng khi chọn mục, bấm bên ngoài, nhấn Escape hoặc chuyển sang desktop.
+- Header fixed: trong suốt, logo lớn khi trên hero; thu gọn về nền trắng khi cuộn khỏi hero. Gạch chân cập nhật theo section đang xem. Menu mobile xổ xuống ngay dưới navbar và đóng khi chọn mục, bấm bên ngoài, nhấn Escape hoặc chuyển sang desktop.
+- Hero phủ toàn màn hình, ảnh/video dùng `object-fit: cover`. Chữ “2K RACING” xếp dọc dưới logo, thu nhỏ vào lề và luôn hiển thị khi cuộn trang.
 - Các section theo thứ tự navbar: Trang chủ → Giới thiệu → Dịch vụ → Phụ tùng → Liên hệ. Gallery nằm sau Dịch vụ; bài viết nằm sau Phụ tùng, trước Liên hệ.
 - Hero luân phiên ảnh/video, có nút trước/sau, chọn mục và tạm dừng. Tạm ngưng khi hero rời màn hình, chuyển tab hoặc mở modal; tự bỏ qua video không phát được.
 - Nút “Liên hệ ngay” trên navbar cuộn tới khối hotline và Zalo.

@@ -79,7 +79,7 @@ export function HeroMedia({
   return (
     <div
       ref={frame}
-      className="hero-photo-frame hero-slideshow"
+      className="hero-slideshow"
       role="region"
       aria-roledescription="trình chiếu"
       aria-label="Ảnh và video thực tế tại 2K RACING"
@@ -92,7 +92,7 @@ export function HeroMedia({
         >
           {item.kind === "image" ? (
             <img
-              className="hero-photo"
+              className="hero-media-object"
               src={imageUrl(item.image)}
               alt={item.alt}
               fetchPriority={slideIndex === 0 ? "high" : "auto"}
@@ -107,7 +107,7 @@ export function HeroMedia({
             <video
               key={item.id}
               ref={video}
-              className="hero-photo hero-media-video"
+              className="hero-media-object hero-media-video"
               muted
               playsInline
               preload="metadata"
@@ -125,18 +125,10 @@ export function HeroMedia({
           ) : null}
         </div>
       ))}
-      <div className="photo-shade" />
-      <span className="photo-tag">
-        {active.kind === "video" ? "VIDEO TẠI XƯỞNG" : "BUILT WITH PASSION."}
+      <div className="hero-media-shade" />
+      <span className="hero-media-type">
+        {active.kind === "video" ? "VIDEO TẠI XƯỞNG" : "HÌNH ẢNH THỰC TẾ"}
       </span>
-      <div className="photo-caption">
-        <span>THE 2K RACING SPIRIT</span>
-        <strong>
-          KHÔNG CHỈ LÀ XE.
-          <br />
-          ĐÓ LÀ CÁ TÍNH.
-        </strong>
-      </div>
       <div
         className="hero-media-dots"
         role="group"

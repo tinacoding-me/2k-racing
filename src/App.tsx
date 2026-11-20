@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Header } from "./components/layout/Header";
+import { BrandRail } from "./components/layout/BrandRail";
+import { useHeroHeader } from "./hooks/useHeroHeader";
 import { Footer } from "./components/layout/Footer";
 import { Hero } from "./components/sections/Hero";
 import { BrandMarquee } from "./components/sections/BrandMarquee";
@@ -22,6 +24,7 @@ type ActiveModal =
   | null;
 export default function App() {
   const [modal, setModal] = useState<ActiveModal>(null);
+  const heroMode = useHeroHeader();
   const openVideo = () => setModal({ kind: "video" });
   const title =
     modal?.kind === "video" ? "CHUYỆN TẠI XƯỞNG" : modal?.data.title || "";
@@ -30,7 +33,8 @@ export default function App() {
       <a className="skip-link" href="#noi-dung">
         Chuyển đến nội dung chính
       </a>
-      <Header />
+      <Header heroMode={heroMode} />
+      <BrandRail heroMode={heroMode} />
       <main id="noi-dung">
         <Hero onVideo={openVideo} mediaPaused={modal !== null} />
         <BrandMarquee />

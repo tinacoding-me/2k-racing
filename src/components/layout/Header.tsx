@@ -3,7 +3,7 @@ import { navigation, shop, imageUrl } from "../../data/content";
 import { Icon } from "../ui/Icon";
 import { useActiveSection } from "../../hooks/useActiveSection";
 
-export function Header() {
+export function Header({ heroMode }: { heroMode: boolean }) {
   const [open, setOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -42,7 +42,10 @@ export function Header() {
     };
   }, [open]);
   return (
-    <header ref={headerRef} className="site-header">
+    <header
+      ref={headerRef}
+      className={`site-header ${heroMode ? "is-hero" : "is-compact"}`}
+    >
       <div className="topbar">
         <div className="site-container flex items-center justify-between gap-4">
           <span>CHUYÊN ĐỒ CHƠI & DỊCH VỤ XE MÁY</span>
