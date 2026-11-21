@@ -14,50 +14,73 @@ export const navigation = [
   ["Trang chủ", "#trang-chu"],
   ["Giới thiệu", "#gioi-thieu"],
   ["Dịch vụ", "#dich-vu"],
+  ["Dự án", "#du-an"],
   ["Phụ tùng", "#phu-tung"],
+  ["Kinh nghiệm", "#kinh-nghiem"],
   ["Liên hệ", "#lien-he"],
 ];
 
-export type HeroMediaItem =
+export type HeroMediaItem = {
+  topic: "SƠN & DECAL" | "CHĂM SÓC" | "NÂNG CẤP";
+} & (
   | { id: string; kind: "image"; image: string; alt: string }
-  | { id: string; kind: "video"; src: string; poster: string; alt: string };
+  | {
+      id: string;
+      kind: "video";
+      src: string;
+      poster: string;
+      alt: string;
+      width: number;
+      height: number;
+    }
+);
 
 // Thứ tự slideshow hero; thêm hoặc thay media tại đây.
 export const heroMedia: HeroMediaItem[] = [
   {
     id: "vario",
+    topic: "NÂNG CẤP",
     kind: "image",
     image: "vario-custom",
     alt: "Xe Vario với mặt nạ thể thao tại 2K RACING",
   },
   {
     id: "workshop-1",
+    topic: "CHĂM SÓC",
     kind: "video",
     src: "/media/videos/workshop-01.mp4",
+    width: 576,
+    height: 1024,
     poster: "sh-detail",
     alt: "Video thực tế tại xưởng 2K RACING 1",
   },
   {
     id: "sh",
+    topic: "CHĂM SÓC",
     kind: "image",
     image: "sh-street",
     alt: "Honda SH với phong cách đường phố",
   },
   {
     id: "suspension",
+    topic: "NÂNG CẤP",
     kind: "image",
     image: "suspension-premium",
     alt: "Chi tiết phụ tùng và phuộc nâng cấp",
   },
   {
     id: "workshop-2",
+    topic: "CHĂM SÓC",
     kind: "video",
     src: "/media/videos/workshop-02.mp4",
+    width: 368,
+    height: 654,
     poster: "brake-upgrade",
     alt: "Video thực tế tại xưởng 2K RACING 2",
   },
   {
     id: "paint",
+    topic: "SƠN & DECAL",
     kind: "image",
     image: "paint-finish",
     alt: "Chi tiết bề mặt sơn xe hoàn thiện",
@@ -385,3 +408,5 @@ export const articles: Article[] = [
   },
 ];
 export const imageUrl = (name: string) => `/media/images/${name}.webp`;
+// Hero dùng bản xuất riêng, giữ nguyên độ phân giải ảnh gốc.
+export const heroImageUrl = (name: string) => `/media/hero/${name}.webp`;

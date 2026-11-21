@@ -10,7 +10,7 @@ export function Header({ heroMode }: { heroMode: boolean }) {
   const active = useActiveSection(headerRef);
   useEffect(() => {
     const onResize = () => {
-      if (window.innerWidth >= 1100) setOpen(false);
+      if (window.innerWidth >= 1280) setOpen(false);
     };
     window.addEventListener("resize", onResize);
     return () => {
@@ -46,7 +46,7 @@ export function Header({ heroMode }: { heroMode: boolean }) {
       ref={headerRef}
       className={`site-header ${heroMode ? "is-hero" : "is-compact"}`}
     >
-      <div className="topbar">
+      <div className="topbar" inert={heroMode} aria-hidden={heroMode}>
         <div className="site-container flex items-center justify-between gap-4">
           <span>CHUYÊN ĐỒ CHƠI & DỊCH VỤ XE MÁY</span>
           <div className="flex items-center gap-6">

@@ -1,6 +1,6 @@
 # 2K RACING
 
-Landing page React + TypeScript + Vite, thuần frontend. Giao diện trắng chủ đạo, điểm nhấn đỏ và chữ đen. Tất cả component được xây dựng riêng, không dùng thư viện UI có sẵn. Tailwind CSS sử dụng CDN theo yêu cầu; layout đặt trong `src/styles/index.css`, bảng màu trong `src/styles/theme.css`.
+Landing page React + TypeScript + Vite, thuần frontend. Phong cách Garage Showreel với nền đen/trắng, đỏ racing và điểm nhấn vàng. Tất cả component được xây dựng riêng, không dùng thư viện UI có sẵn. Tailwind CSS sử dụng CDN theo yêu cầu; layout nền tảng đặt trong `src/styles/index.css`, hệ màu và giao diện các section trong `src/styles/theme.css`.
 
 ## Chạy dự án
 
@@ -27,6 +27,7 @@ npm run format   # Định dạng mã nguồn bằng Prettier
 assets/originals/       Ảnh JPG gốc, giữ nguyên để chỉnh sửa sau này
 public/media/
   images/              12 ảnh WebP đã tối ưu, tên không dấu
+  hero/                Ảnh hero/poster giữ độ phân giải gốc, WebP quality 94
   videos/              2 video thực tế tại xưởng
 scripts/
   prepare-media.py     Script tạo ảnh WebP (cần Python + Pillow)
@@ -38,7 +39,7 @@ src/
   data/content.ts      Thông tin cửa hàng, dịch vụ, phụ tùng, bài viết, gallery
   hooks/               Trạng thái header và section đang xem
   styles/index.css     Tokens, các section, responsive, reduced motion
-  styles/theme.css     Bảng màu trắng – đỏ – đen của toàn trang
+  styles/theme.css     Theme poster đen – trắng – đỏ – vàng cho toàn trang
   styles/hero.css      Hero toàn màn hình, header trong suốt/thu gọn, chữ dọc
   App.tsx              Ghép trang và điều phối modal
   main.tsx             React entry point
@@ -49,17 +50,19 @@ src/
 - Sửa địa chỉ, hotline, Zalo tại `src/data/content.ts`.
 - Ảnh hiển thị dùng `imageUrl('tên-file')`; thay ảnh cùng tên tại `public/media/images/` hoặc cập nhật dữ liệu.
 - Hai video lần lượt là `workshop-01.mp4` và `workshop-02.mp4`.
-- Đổi bảng màu và màu chủ đạo `--red` trong `src/styles/theme.css`.
+- Đổi bảng màu `--ink`, `--red`, `--yellow` trong `src/styles/theme.css`.
 - Danh sách dịch vụ, nhóm tra cứu, bài viết và phụ tùng nằm trong `src/data/content.ts`.
-- Slideshow hero dùng danh sách `heroMedia` trong `src/data/content.ts`: thêm/sắp xếp ảnh và video tại đây. Ảnh giữ 6 giây; video tự phát không tiếng và chuyển khi kết thúc.
+- Slideshow hero dùng danh sách `heroMedia` trong `src/data/content.ts`: thêm/sắp xếp ảnh và video tại đây, `topic` chọn nhãn dịch vụ sáng lên cạnh poster. Ảnh giữ 6 giây; video tự phát không tiếng và chuyển khi kết thúc.
 - Khi thay địa chỉ cần cập nhật cả URL Google Maps iframe trong `Footer.tsx`.
 
 ## Các tương tác
 
-- Header fixed: trong suốt, logo lớn khi trên hero; thu gọn về nền trắng khi cuộn khỏi hero. Gạch chân cập nhật theo section đang xem. Menu mobile xổ xuống ngay dưới navbar và đóng khi chọn mục, bấm bên ngoài, nhấn Escape hoặc chuyển sang desktop.
-- Hero phủ toàn màn hình, ảnh/video dùng `object-fit: cover`. Chữ “2K RACING” xếp dọc dưới logo, thu nhỏ vào lề và luôn hiển thị khi cuộn trang.
-- Các section theo thứ tự navbar: Trang chủ → Giới thiệu → Dịch vụ → Phụ tùng → Liên hệ. Gallery nằm sau Dịch vụ; bài viết nằm sau Phụ tùng, trước Liên hệ.
+- Header fixed: logo kèm chữ ngang trên hero trong suốt ở đầu trang; thu gọn về nền đen ngay khi cuộn quá 24px và chỉ mở lại khi về trong 8px đầu trang. Gạch chân vàng cập nhật theo section đang xem. Menu chuyển sang dropdown dưới 1280px và đóng khi chọn mục, bấm bên ngoài, nhấn Escape hoặc chuyển sang desktop.
+- Navbar giữ nguyên khung và chiều cao khi đổi trạng thái; hàng menu trượt nhẹ, logo thu bằng `transform`, nền và thanh thông tin fade trong 520ms. Hai ngưỡng cuộn riêng tránh đổi trạng thái liên tục ở đầu trang, không phụ thuộc chiều cao hero. Theo yêu cầu chuyển mượt, riêng navbar giữ animation nhỏ khi bật reduced motion; các section khác vẫn giảm chuyển động.
+- Hero theo bố cục Garage Showreel: nền đen, dải đỏ chéo, chữ “2K RACING” lớn nằm sau poster. Desktop dùng khung media dọc nghiêng nhẹ, giới hạn chiều cao 660px; mobile chuyển media thành nền với wordmark và điều khiển ở đáy. Ảnh hero dùng bản xuất riêng từ ảnh gốc tại `public/media/hero/`. Chữ thương hiệu dọc ở lề xuất hiện khi cuộn khỏi hero.
+- Các section theo thứ tự navbar: Trang chủ → Giới thiệu → Dịch vụ → Dự án → Phụ tùng → Kinh nghiệm → Liên hệ. Một danh sách `navigation` dùng chung cho menu desktop, mobile và xác định section đang xem.
 - Hero luân phiên ảnh/video, có nút trước/sau, chọn mục và tạm dừng. Tạm ngưng khi hero rời màn hình, chuyển tab hoặc mở modal; tự bỏ qua video không phát được.
+- Nút “Khám phá xưởng” mở video trong dialog; các nhãn dịch vụ cạnh poster dẫn đến section Dịch vụ. Hiệu ứng chuyển poster tôn trọng reduced motion.
 - Nút “Liên hệ ngay” trên navbar cuộn tới khối hotline và Zalo.
 - Card dịch vụ mở chi tiết; nút tư vấn dẫn về phần liên hệ.
 - Gallery lọc theo danh mục, mở ảnh lớn, xem thêm/thu gọn.

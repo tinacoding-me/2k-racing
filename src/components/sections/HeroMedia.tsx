@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { heroMedia, imageUrl } from "../../data/content";
+import { heroMedia, heroImageUrl } from "../../data/content";
 import { Icon } from "../ui/Icon";
 
 const PHOTO_DURATION = 6000;
 const VIDEO_LOAD_TIMEOUT = 12000;
 
 export function HeroMedia({
-  onVideo,
+  onSlideChange,
   suspended = false,
 }: {
-  onVideo: () => void;
+  onSlideChange: (index: number) => void;
   suspended?: boolean;
 }) {
   const [index, setIndex] = useState(0);
@@ -21,6 +21,10 @@ export function HeroMedia({
   const video = useRef<HTMLVideoElement>(null);
   const active = heroMedia[index];
   const paused = userPaused || !visible || !pageVisible || suspended;
+
+  useEffect(() => {
+    onSlideChange(index);
+  }, [index, onSlideChange]);
 
   const advance = useCallback(() => {
     setVideoPlaying(false);
@@ -84,51 +88,67 @@ export function HeroMedia({
       aria-roledescription="trình chiếu"
       aria-label="Ảnh và video thực tế tại 2K RACING"
     >
-      {heroMedia.map((item, slideIndex) => (
-        <div
-          key={item.id}
-          className={`hero-media-slide ${index === slideIndex ? "is-active" : ""}`}
-          aria-hidden={index !== slideIndex}
-        >
-          {item.kind === "image" ? (
-            <img
-              className="hero-media-object"
-              src={imageUrl(item.image)}
-              alt={item.alt}
-              fetchPriority={slideIndex === 0 ? "high" : "auto"}
-              loading={slideIndex === 0 ? "eager" : "lazy"}
-              width="900"
-              height="1200"
-              onError={() => {
-                if (index === slideIndex) advance();
-              }}
-            />
-          ) : index === slideIndex ? (
-            <video
+      <div className="showreel-poster">
+        <div className="showreel-poster-screen">
+          {heroMedia.map((item, slideIndex) => (
+            <div
               key={item.id}
-              ref={video}
-              className="hero-media-object hero-media-video"
-              muted
-              playsInline
-              preload="metadata"
-              poster={imageUrl(item.poster)}
-              aria-label={item.alt}
-              onEnded={advance}
-              onError={() => {
-                if (!paused) advance();
-              }}
-              onPlaying={() => setVideoPlaying(true)}
-              onWaiting={() => setVideoPlaying(false)}
+              className={`hero-media-slide ${index === slideIndex ? "is-active" : ""}`}
+              aria-hidden={index !== slideIndex}
             >
-              <source src={item.src} type="video/mp4" />
-            </video>
-          ) : null}
+              {item.kind === "image" ? (
+                <img
+                  className="hero-media-object"
+                  src={heroImageUrl(item.image)}
+                  alt={item.alt}
+                  fetchPriority={slideIndex === 0 ? "high" : "auto"}
+                  loading={slideIndex === 0 ? "eager" : "lazy"}
+                  width="900"
+                  height="1200"
+                  onError={() => {
+                    if (index === slideIndex) advance();
+                  }}
+                />
+              ) : index === slideIndex ? (
+                <video
+                  key={item.id}
+                  ref={video}
+                  className="hero-media-object hero-media-video"
+                  width={item.width}
+                  height={item.height}
+                  muted
+                  playsInline
+                  preload="metadata"
+                  poster={heroImageUrl(item.poster)}
+                  aria-label={item.alt}
+                  onEnded={advance}
+                  onError={() => {
+                    if (!paused) advance();
+                  }}
+                  onPlaying={() => setVideoPlaying(true)}
+                  onWaiting={() => setVideoPlaying(false)}
+                >
+                  <source src={item.src} type="video/mp4" />
+                </video>
+              ) : null}
+            </div>
+          ))}
+          <div className="hero-media-shade" />
+          <span className="showreel-film-label">
+            <span /> {active.kind === "video" ? "GARAGE FILM" : "GARAGE PHOTO"}
+          </span>
         </div>
-      ))}
-      <div className="hero-media-shade" />
-      <span className="hero-media-type">
-        {active.kind === "video" ? "VIDEO TẠI XƯỞNG" : "HÌNH ẢNH THỰC TẾ"}
-      </span>
+        <div className="showreel-poster-caption">
+          <strong>
+            2K RACING<span>✳</span>
+          </strong>
+          <span>
+            REAL BIKES.
+            <br />
+            REAL PASSION.
+          </span>
+        </div>
+      </div>
       <div
         className="hero-media-dots"
         role="group"
@@ -147,12 +167,13 @@ export function HeroMedia({
         ))}
       </div>
       <div className="hero-media-footer">
-        <button className="hero-watch" onClick={onVideo}>
-          <span>
-            <Icon name="play" size={15} />
-          </span>
-          Xem tại xưởng
-        </button>
+        <span
+          className="showreel-slide-status"
+          aria-label={`Mục ${index + 1} trên ${heroMedia.length}`}
+        >
+          <b>{String(index + 1).padStart(2, "0")}</b>
+          <span>/ {String(heroMedia.length).padStart(2, "0")}</span>
+        </span>
         <div
           className="hero-media-controls"
           role="group"

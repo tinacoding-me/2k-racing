@@ -1,4 +1,5 @@
-import { shop } from "../../data/content";
+import { useState } from "react";
+import { heroMedia } from "../../data/content";
 import { Icon } from "../ui/Icon";
 import { HeroMedia } from "./HeroMedia";
 
@@ -9,35 +10,66 @@ export function Hero({
   onVideo: () => void;
   mediaPaused?: boolean;
 }) {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const activeService = heroMedia[activeSlide].topic;
+
   return (
     <section
       className="cinematic-hero"
       id="trang-chu"
       aria-labelledby="hero-heading"
     >
-      <HeroMedia onVideo={onVideo} suspended={mediaPaused} />
-      <div className="cinematic-content">
-        <p className="cinematic-eyebrow">
-          <span />
-          MOTORCYCLE SERVICE & CUSTOM · SAIGON
+      {/* Các lớp poster trang trí không tham gia điều hướng hay đọc màn hình. */}
+      <div className="showreel-track" aria-hidden="true" />
+      <div className="showreel-topline" aria-hidden="true">
+        <span>SAIGON, VIETNAM</span>
+        <span>MOTORCYCLE CULTURE</span>
+      </div>
+      <div className="showreel-copy">
+        <p className="showreel-eyebrow">
+          <span /> CHẤT XE TỪ ĐAM MÊ
         </p>
         <h1 id="hero-heading">
-          <span>CHẤT RIÊNG.</span>
-          <em>TRÊN TỪNG CHUYỂN ĐỘNG.</em>
+          <span>ĐỘ CHẤT XE.</span>
+          <em>ĐÚNG CHẤT BẠN.</em>
         </h1>
-        <p className="cinematic-description">
-          Chăm xe bằng sự tận tâm. Nâng cấp bằng đam mê.
+        <p className="showreel-description">
+          Từ một chi tiết nhỏ đến diện mạo mới.
+          <br />
+          Cùng 2K làm nên chiếc xe mang chất riêng của bạn.
         </p>
-        <div className="cinematic-actions">
-          <a className="button button-red" href="#dich-vu">
-            Khám phá dịch vụ
-            <Icon name="wrench" size={18} />
-          </a>
-          <a className="button button-outline" href={`tel:${shop.tel}`}>
-            <Icon name="phone" size={18} />
-            Gọi hotline
+        <div className="showreel-actions">
+          <button className="showreel-cta" onClick={onVideo}>
+            <Icon name="play" size={15} /> Khám phá xưởng
+          </button>
+          <a className="showreel-service-link" href="#dich-vu">
+            Dịch vụ tại 2K
           </a>
         </div>
+      </div>
+      <div className="showreel-wordmark" aria-hidden="true">
+        2K RACING
+      </div>
+      <HeroMedia suspended={mediaPaused} onSlideChange={setActiveSlide} />
+      <nav className="showreel-services" aria-label="Dịch vụ nổi bật tại 2K">
+        <span className="showreel-services-label">
+          CHẤT RIÊNG
+          <br />
+          CỦA BẠN
+        </span>
+        {["SƠN & DECAL", "CHĂM SÓC", "NÂNG CẤP"].map((service) => (
+          <a
+            key={service}
+            href="#dich-vu"
+            className={service === activeService ? "is-current" : ""}
+          >
+            {service}
+          </a>
+        ))}
+      </nav>
+      <div className="showreel-bottomline" aria-hidden="true">
+        <span>CHUYÊN ĐỒ CHƠI & DỊCH VỤ XE MÁY</span>
+        <span>UY TÍN — CHẤT LƯỢNG</span>
       </div>
     </section>
   );

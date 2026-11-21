@@ -37,6 +37,8 @@ export function useActiveSection(headerRef: RefObject<HTMLElement | null>) {
 
     const resizeObserver = new ResizeObserver(schedule);
     resizeObserver.observe(document.body);
+    // Gạch chân theo đúng vị trí kể cả trong lúc header đang thu gọn.
+    if (headerRef.current) resizeObserver.observe(headerRef.current);
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
     window.addEventListener("hashchange", schedule);

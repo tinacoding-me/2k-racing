@@ -7,7 +7,8 @@ ROOT = Path(__file__).resolve().parents[1]
 ORIGINALS = ROOT / 'assets' / 'originals'
 IMAGES = ROOT / 'public' / 'media' / 'images'
 VIDEOS = ROOT / 'public' / 'media' / 'videos'
-for folder in (ORIGINALS, IMAGES, VIDEOS):
+HERO = ROOT / 'public' / 'media' / 'hero'
+for folder in (ORIGINALS, IMAGES, VIDEOS, HERO):
     folder.mkdir(parents=True, exist_ok=True)
 
 PHOTO_MAP = {
@@ -32,6 +33,10 @@ for original, name in PHOTO_MAP.items():
     if retained.exists():
         with Image.open(retained) as image:
             image = ImageOps.exif_transpose(image).convert('RGB')
+            # Bản hero riêng: giữ độ phân giải nguồn, giảm nén cho ảnh lớn/poster.
+            if name in {'vario-custom', 'sh-street', 'suspension-premium',
+                        'paint-finish', 'sh-detail', 'brake-upgrade'}:
+                image.save(HERO / f'{name}.webp', 'WEBP', quality=94, method=6)
             image.thumbnail((1500, 1800))
             image.save(IMAGES / f'{name}.webp', 'WEBP', quality=86)
 
