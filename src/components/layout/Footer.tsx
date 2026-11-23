@@ -33,12 +33,14 @@ export function Footer() {
                 Chất riêng trên từng chuyển động.
               </p>
               <div className="social-links" aria-label="Kết nối mạng xã hội">
-                <button
-                  aria-label="Thông tin Facebook 2K RACING"
-                  onClick={() => setSocial("Facebook")}
+                <a
+                  href={shop.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook 2K RACING"
                 >
-                  <b className="social-facebook">f</b>
-                </button>
+                  <Icon name="facebook" size={24} />
+                </a>
                 <button
                   aria-label="Thông tin YouTube 2K RACING"
                   onClick={() => setSocial("YouTube")}
@@ -117,8 +119,8 @@ export function Footer() {
             </div>
             <div className="footer-map">
               <iframe
-                title="Vị trí 2K RACING — 118 Hồ Tùng Mậu, Quận 1, TP.HCM"
-                src="https://www.google.com/maps?q=118%20H%E1%BB%93%20T%C3%B9ng%20M%E1%BA%ADu%2C%20Qu%E1%BA%ADn%201%2C%20TP.HCM&output=embed"
+                title={`Vị trí 2K RACING — ${shop.address}`}
+                src={shop.mapEmbed}
                 width="500"
                 height="250"
                 loading="lazy"
@@ -127,7 +129,7 @@ export function Footer() {
               />
               <a href={shop.maps} target="_blank" rel="noreferrer">
                 <Icon name="pin" size={16} />
-                118 HỒ TÙNG MẬU, QUẬN 1
+                {shop.address}
               </a>
             </div>
           </div>
@@ -156,6 +158,15 @@ export function Footer() {
         </a>
       </div>
       <div className="floating-social">
+        <a
+          className="floating-facebook"
+          href={shop.facebook}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Mở Facebook 2K RACING"
+        >
+          <Icon name="facebook" size={27} />
+        </a>
         <a
           className="floating-zalo"
           href={shop.zalo}

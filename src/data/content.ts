@@ -1,14 +1,21 @@
 import type { IconName } from "../components/ui/Icon";
 
 // Thay thông tin cửa hàng tại đây; các component dùng chung một nguồn dữ liệu.
+const phoneNumber = "0354836329";
+const address = "67 Đường số 5, Phước Long, Hồ Chí Minh";
+const mapQuery = encodeURIComponent(address);
+
 export const shop = {
   name: "2K RACING",
-  phone: "0902 842 526",
-  tel: "0902842526",
-  address: "118 Hồ Tùng Mậu, Quận 1, TP.HCM",
+  phone: phoneNumber,
+  tel: phoneNumber,
+  address,
   hours: "08:00 – 20:00",
-  zalo: "https://zalo.me/0902842526",
-  maps: "https://www.google.com/maps/search/?api=1&query=118+Hồ+Tùng+Mậu+Quận+1+TPHCM",
+  zalo: `https://zalo.me/${phoneNumber}`,
+  facebook:
+    "https://www.facebook.com/people/2K-Racing-Decal-Qu%E1%BA%ADn-9/61566988531772/",
+  maps: `https://www.google.com/maps/search/?api=1&query=${mapQuery}`,
+  mapEmbed: `https://www.google.com/maps?q=${mapQuery}&output=embed`,
 };
 export const navigation = [
   ["Trang chủ", "#trang-chu"],

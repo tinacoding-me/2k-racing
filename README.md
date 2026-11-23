@@ -53,7 +53,7 @@ src/
 - Đổi bảng màu `--ink`, `--red`, `--yellow` trong `src/styles/theme.css`.
 - Danh sách dịch vụ, nhóm tra cứu, bài viết và phụ tùng nằm trong `src/data/content.ts`.
 - Slideshow hero dùng danh sách `heroMedia` trong `src/data/content.ts`: thêm/sắp xếp ảnh và video tại đây, `topic` chọn nhãn dịch vụ sáng lên cạnh poster. Ảnh giữ 6 giây; video tự phát không tiếng và chuyển khi kết thúc.
-- Khi thay địa chỉ cần cập nhật cả URL Google Maps iframe trong `Footer.tsx`.
+- Hotline, Zalo, Facebook và địa chỉ dùng chung `shop` trong `src/data/content.ts`. Link chỉ đường và iframe Google Maps tự lấy địa chỉ này.
 
 ## Các tương tác
 
@@ -68,13 +68,13 @@ src/
 - Gallery lọc theo danh mục, mở ảnh lớn, xem thêm/thu gọn.
 - Các nút tư vấn phụ tùng dẫn về phần liên hệ.
 - Modal xem hai video và đọc đầy đủ bốn bài viết.
-- Khách muốn hẹn lịch gọi trực tiếp `0902 842 526` hoặc nhắn Zalo để trao đổi và thống nhất với cửa hàng. Không có form, luồng đặt lịch trực tuyến hay backend/database.
-- Nút hotline dùng `tel:`, Zalo dùng số được cung cấp, Google Maps có iframe và link chỉ đường.
+- Khách muốn hẹn lịch gọi trực tiếp `0354836329` hoặc nhắn Zalo để trao đổi và thống nhất với cửa hàng. Không có form, luồng đặt lịch trực tuyến hay backend/database.
+- Nút hotline dùng `tel:0354836329`; Zalo dẫn tới `https://zalo.me/0354836329`. Facebook có link chính thức ở footer và nút tròn nổi cạnh Zalo. Google Maps có iframe và link chỉ đường đến 67 Đường số 5, Phước Long, Hồ Chí Minh.
 - Dialog hỗ trợ Escape, focus trap và trả focus về nút mở. Có skip link, focus visible và reduced motion.
 
 ## Nội dung cần cập nhật khi đưa vào sử dụng
 
-Chưa có URL chính thức của Facebook, YouTube, TikTok. Các icon hiện thông báo kênh đang cập nhật và dẫn khách sang Zalo; thay bằng link chính thức trong `Footer.tsx` khi có. Không gán đường dẫn giả hoặc tự đoán tên tài khoản.
+Facebook đã có URL chính thức trong `shop.facebook`. Chưa có URL chính thức của YouTube và TikTok; hai icon này hiện thông báo kênh đang cập nhật và dẫn khách sang Zalo. Thay bằng link chính thức trong `Footer.tsx` khi có.
 
 Không tự gán chứng nhận ISO, kinh nghiệm 10 năm, chính sách bảo hành, mức giá hay đánh giá khách hàng chưa được cung cấp. Bài viết là nội dung giới thiệu có thể biên tập lại.
 
