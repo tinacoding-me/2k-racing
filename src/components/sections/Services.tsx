@@ -11,11 +11,11 @@ export function Services({
   return (
     <section id="dich-vu" className="section-pad services-section">
       <div className="site-container">
-        <div className="heading-row">
+        <div className="heading-row" data-reveal>
           <SectionHeading
             eyebrow="CHĂM XE TOÀN DIỆN"
             title="XẾ YÊU CẦN GÌ?"
-            accent="2K LO."
+            accent="2K LO"
           />
           <p>
             Từ làm đẹp đến nâng cấp vận hành.
@@ -28,6 +28,7 @@ export function Services({
             <button
               key={service.id}
               className="service-card"
+              data-reveal
               onClick={() => onService(service)}
             >
               <span className="service-icon">
@@ -42,7 +43,7 @@ export function Services({
             </button>
           ))}
         </div>
-        <div className="service-directory">
+        <div className="service-directory" data-reveal>
           <div className="directory-label">
             <Icon name="menu" size={16} /> DANH MỤC DỊCH VỤ
           </div>

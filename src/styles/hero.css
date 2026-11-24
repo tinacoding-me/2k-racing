@@ -376,6 +376,81 @@
   user-select: none;
   pointer-events: none;
 }
+
+/* Chạy một lần khi mở trang; chỉ animate transform/opacity, không đẩy bố cục. */
+.racing-wordmark {
+  --race-duration: 1000ms;
+  --race-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.racing-letter,
+.racing-wordmark-gap {
+  display: inline-block;
+}
+.racing-letter {
+  position: relative;
+}
+.racing-wordmark.is-waiting .racing-letter {
+  opacity: 0;
+}
+.racing-wordmark.is-racing .racing-letter {
+  animation: racing-letter-arrive var(--race-duration) var(--race-ease)
+    var(--race-delay) both;
+  will-change: transform, opacity;
+}
+/* Vệt tốc độ vàng/đỏ phía sau chữ, tự biến mất sau pha vào vị trí. */
+.racing-wordmark.is-racing .racing-letter::after {
+  content: "";
+  position: absolute;
+  width: 0.85em;
+  height: max(2px, 0.013em);
+  right: 94%;
+  top: 55%;
+  background: linear-gradient(90deg, transparent, var(--yellow));
+  box-shadow: 0 0.055em 0 -1px var(--red);
+  transform-origin: right center;
+  animation: racing-letter-trail var(--race-duration) linear var(--race-delay)
+    both;
+  will-change: transform, opacity;
+}
+@keyframes racing-letter-arrive {
+  0% {
+    opacity: 0;
+    transform: translate3d(-110vw, 0.12em, 0) skewX(-30deg) rotate(-3deg)
+      scaleX(1.18);
+  }
+  12% {
+    opacity: 1;
+  }
+  64% {
+    transform: translate3d(0.055em, -0.01em, 0) skewX(6deg) rotate(1deg)
+      scaleX(0.98);
+  }
+  82% {
+    transform: translate3d(-0.012em, 0, 0) skewX(-2deg) rotate(-0.4deg)
+      scaleX(1);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) skewX(0) rotate(0) scaleX(1);
+  }
+}
+@keyframes racing-letter-trail {
+  0%,
+  8% {
+    opacity: 0;
+    transform: scaleX(0.35);
+  }
+  18%,
+  40% {
+    opacity: 0.8;
+    transform: scaleX(1);
+  }
+  68%,
+  100% {
+    opacity: 0;
+    transform: scaleX(0.15);
+  }
+}
 .showreel-services {
   position: absolute;
   z-index: 4;
@@ -941,8 +1016,7 @@
     transform: none;
     transition: none;
   }
-  /* Navbar được yêu cầu chuyển mượt: chỉ bật lại chuyển động nhỏ của thanh này.
-     Các section và slideshow vẫn giữ quy tắc giảm chuyển động toàn cục. */
+  /* Navbar được yêu cầu chuyển mượt. Các hiệu ứng khác được khai báo riêng. */
   .site-header .header-main,
   .site-header .brand {
     transition: transform var(--header-duration) var(--header-ease) !important;
@@ -956,5 +1030,14 @@
     transition:
       opacity var(--header-duration) var(--header-ease),
       transform var(--header-duration) var(--header-ease) !important;
+  }
+  /* Intro thương hiệu được yêu cầu chạy lúc mở trang; không bật lại animation khác. */
+  .racing-wordmark.is-racing .racing-letter {
+    animation: racing-letter-arrive var(--race-duration) var(--race-ease)
+      var(--race-delay) both !important;
+  }
+  .racing-wordmark.is-racing .racing-letter::after {
+    animation: racing-letter-trail var(--race-duration) linear var(--race-delay)
+      both !important;
   }
 }

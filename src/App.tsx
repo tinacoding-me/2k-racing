@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Header } from "./components/layout/Header";
 import { BrandRail } from "./components/layout/BrandRail";
 import { useHeroHeader } from "./hooks/useHeroHeader";
+import { useScrollReveal } from "./hooks/useScrollReveal";
 import { Footer } from "./components/layout/Footer";
 import { Hero } from "./components/sections/Hero";
 import { BrandMarquee } from "./components/sections/BrandMarquee";
@@ -25,6 +26,8 @@ type ActiveModal =
 export default function App() {
   const [modal, setModal] = useState<ActiveModal>(null);
   const heroMode = useHeroHeader();
+  const mainRef = useRef<HTMLElement>(null);
+  useScrollReveal(mainRef);
   const openVideo = () => setModal({ kind: "video" });
   const title =
     modal?.kind === "video" ? "CHUYỆN TẠI XƯỞNG" : modal?.data.title || "";
@@ -35,7 +38,7 @@ export default function App() {
       </a>
       <Header heroMode={heroMode} />
       <BrandRail heroMode={heroMode} />
-      <main id="noi-dung">
+      <main id="noi-dung" ref={mainRef}>
         <Hero onVideo={openVideo} mediaPaused={modal !== null} />
         <BrandMarquee />
         <About onVideo={openVideo} />

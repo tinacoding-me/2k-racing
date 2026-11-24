@@ -30,7 +30,7 @@ export type IconName =
 const paths: Record<IconName, React.ReactNode> = {
   facebook: (
     <path
-      d="M14.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4v2.4H8.7V13h2.7v8z"
+      d="M13.25 20.75v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.35c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4v2.4h-2.7v3.1h2.7v8z"
       fill="currentColor"
       stroke="none"
     />
@@ -113,7 +113,9 @@ const paths: Record<IconName, React.ReactNode> = {
       <path d="M16 8V3H3v13h5" />
     </>
   ),
-  message: <path d="M21 11a9 9 0 0 1-9 9H4l-3 2 2-7a9 9 0 1 1 18-4Z" />,
+  message: (
+    <path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.35 0-2.65-.32-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z" />
+  ),
   bike: (
     <>
       <circle cx="5" cy="17" r="4" />

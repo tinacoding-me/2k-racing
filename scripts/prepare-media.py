@@ -18,8 +18,8 @@ PHOTO_MAP = {
     'mẫu - thắng xe.jpg': 'brake-detail',
     'mẫu thắng xe 2.jpg': 'brake-upgrade',
     'mẫu - xe -3 .jpg': 'sh-street',
-    'mẫu-xe-1.jpg': 'sh-detail',
-    'mẫu-xe-2.jpg': 'vario-custom',
+    'mẫu-xe-1.jpg': 'honda-lead-detail',
+    'mẫu-xe-2.jpg': 'honda-ab-custom',
     'mẫu phuộc -3.jpg': 'suspension-kit',
     'mẫu phuộc 3.jpg': 'suspension-display',
     'mẫu-phuộc.jpg': 'suspension-accessories',
@@ -34,8 +34,8 @@ for original, name in PHOTO_MAP.items():
         with Image.open(retained) as image:
             image = ImageOps.exif_transpose(image).convert('RGB')
             # Bản hero riêng: giữ độ phân giải nguồn, giảm nén cho ảnh lớn/poster.
-            if name in {'vario-custom', 'sh-street', 'suspension-premium',
-                        'paint-finish', 'sh-detail', 'brake-upgrade'}:
+            if name in {'honda-ab-custom', 'sh-street', 'suspension-premium',
+                        'paint-finish', 'honda-lead-detail', 'brake-upgrade'}:
                 image.save(HERO / f'{name}.webp', 'WEBP', quality=94, method=6)
             image.thumbnail((1500, 1800))
             image.save(IMAGES / f'{name}.webp', 'WEBP', quality=86)

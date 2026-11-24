@@ -16,7 +16,8 @@ export function SectionHeading({
         {eyebrow}
       </span>
       <h2>
-        {title} {accent && <span>{accent}</span>}
+        {title}
+        {accent && <span> - {accent}</span>}
       </h2>
       {description && <p>{description}</p>}
     </div>

@@ -19,11 +19,11 @@ export function Showcase({
     <>
       <section className="section-pad showcase-section" id="du-an">
         <div className="site-container">
-          <div className="heading-row">
+          <div className="heading-row" data-reveal>
             <SectionHeading
               eyebrow="TỪ XƯỞNG 2K RACING"
-              title="XE THẬT."
-              accent="CHẤT THẬT."
+              title="XE THẬT"
+              accent="CHẤT THẬT"
             />
             <span className="image-note">
               <span />
@@ -32,6 +32,7 @@ export function Showcase({
           </div>
           <div
             className="gallery-filters"
+            data-reveal
             role="group"
             aria-label="Lọc hình ảnh"
           >
@@ -55,6 +56,7 @@ export function Showcase({
             {shown.map((item) => (
               <button
                 className="gallery-card"
+                data-reveal="fade"
                 key={item.image}
                 onClick={() => onImage(item)}
               >
@@ -90,11 +92,11 @@ export function Showcase({
       </section>
       <section className="section-pad parts-section" id="phu-tung">
         <div className="site-container">
-          <div className="heading-row">
+          <div className="heading-row" data-reveal>
             <SectionHeading
               eyebrow="CHỌN ĐÚNG. CHẠY CHẤT."
-              title="CHI TIẾT NHỎ."
-              accent="KHÁC BIỆT LỚN."
+              title="CHI TIẾT NHỎ"
+              accent="KHÁC BIỆT LỚN"
             />
             <p>
               Phụ tùng phù hợp với xe.
@@ -104,7 +106,7 @@ export function Showcase({
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {products.map((product) => (
-              <article className="product-card" key={product.image}>
+              <article className="product-card" key={product.image} data-reveal>
                 <a
                   href="#lien-he"
                   className="product-image"
@@ -130,7 +132,7 @@ export function Showcase({
               </article>
             ))}
           </div>
-          <div className="parts-note">
+          <div className="parts-note" data-reveal>
             <Icon name="shield" size={18} />
             <span>
               Mỗi dòng xe có một cấu hình phù hợp. Liên hệ 2K để được tư vấn chi

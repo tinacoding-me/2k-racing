@@ -16,7 +16,7 @@ export function VideoPlayer() {
         muted
         playsInline
         preload="metadata"
-        poster={imageUrl("sh-detail")}
+        poster={imageUrl("honda-lead-detail")}
       >
         <source src={`/media/videos/workshop-0${video}.mp4`} type="video/mp4" />
         Trình duyệt không hỗ trợ video.{" "}

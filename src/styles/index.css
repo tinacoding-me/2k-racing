@@ -1237,9 +1237,18 @@ ul {
   justify-content: center;
   width: 45px;
   height: 45px;
+  padding: 0;
+  flex-shrink: 0;
+  line-height: 1;
   border-radius: 50%;
   box-shadow: 0 4px 20px #0005;
   transition: transform 0.2s;
+}
+.floating-social > a > svg,
+.social-links > a > svg,
+.social-links > button > svg {
+  display: block;
+  flex-shrink: 0;
 }
 .floating-social > a:hover {
   transform: translateY(-3px);

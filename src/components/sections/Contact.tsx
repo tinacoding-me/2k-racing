@@ -11,11 +11,11 @@ export function Contact() {
       aria-labelledby="contact-heading"
     >
       <div className="site-container contact-grid">
-        <div className="contact-copy">
+        <div className="contact-copy" data-reveal>
           <SectionHeading
             eyebrow="TRÒ CHUYỆN CÙNG 2K RACING"
             title="CẦN TƯ VẤN?"
-            accent="GỌI 2K NGAY."
+            accent="GỌI 2K NGAY"
           />
           <p>
             Bạn muốn hẹn lịch chăm xe? Hãy liên hệ trực tiếp qua hotline để được
@@ -26,7 +26,7 @@ export function Contact() {
             cho cửa hàng.
           </p>
         </div>
-        <div className="contact-card">
+        <div className="contact-card" data-reveal>
           <span className="contact-card-icon">
             <Icon name="phone" size={28} />
           </span>

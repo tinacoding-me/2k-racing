@@ -2,6 +2,8 @@ import { useState } from "react";
 import { heroMedia } from "../../data/content";
 import { Icon } from "../ui/Icon";
 import { HeroMedia } from "./HeroMedia";
+import { RacingWordmark } from "./RacingWordmark";
+import { useHeroIntro } from "../../hooks/useHeroIntro";
 
 export function Hero({
   onVideo,
@@ -12,12 +14,14 @@ export function Hero({
 }) {
   const [activeSlide, setActiveSlide] = useState(0);
   const activeService = heroMedia[activeSlide].topic;
+  const intro = useHeroIntro();
 
   return (
     <section
       className="cinematic-hero"
       id="trang-chu"
       aria-labelledby="hero-heading"
+      data-intro={intro.phase}
     >
       {/* Các lớp poster trang trí không tham gia điều hướng hay đọc màn hình. */}
       <div className="showreel-track" aria-hidden="true" />
@@ -30,8 +34,8 @@ export function Hero({
           <span /> CHẤT XE TỪ ĐAM MÊ
         </p>
         <h1 id="hero-heading">
-          <span>ĐỘ CHẤT XE.</span>
-          <em>ĐÚNG CHẤT BẠN.</em>
+          <span>ĐỘ CHẤT XE</span>
+          <em>ĐÚNG CHẤT BẠN</em>
         </h1>
         <p className="showreel-description">
           Từ một chi tiết nhỏ đến diện mạo mới.
@@ -47,9 +51,7 @@ export function Hero({
           </a>
         </div>
       </div>
-      <div className="showreel-wordmark" aria-hidden="true">
-        2K RACING
-      </div>
+      <RacingWordmark phase={intro.phase} onComplete={intro.complete} />
       <HeroMedia suspended={mediaPaused} onSlideChange={setActiveSlide} />
       <nav className="showreel-services" aria-label="Dịch vụ nổi bật tại 2K">
         <span className="showreel-services-label">

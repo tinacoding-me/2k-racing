@@ -7,7 +7,7 @@ const mapQuery = encodeURIComponent(address);
 
 export const shop = {
   name: "2K RACING",
-  phone: phoneNumber,
+  phone: phoneNumber.replace(/^(\d{4})(\d{3})(\d{3})$/, "$1 $2 $3"),
   tel: phoneNumber,
   address,
   hours: "08:00 – 20:00",
@@ -45,11 +45,11 @@ export type HeroMediaItem = {
 // Thứ tự slideshow hero; thêm hoặc thay media tại đây.
 export const heroMedia: HeroMediaItem[] = [
   {
-    id: "vario",
+    id: "honda-ab",
     topic: "NÂNG CẤP",
     kind: "image",
-    image: "vario-custom",
-    alt: "Xe Vario với mặt nạ thể thao tại 2K RACING",
+    image: "honda-ab-custom",
+    alt: "Honda Air Blade với mặt nạ thể thao tại 2K RACING",
   },
   {
     id: "workshop-1",
@@ -58,7 +58,7 @@ export const heroMedia: HeroMediaItem[] = [
     src: "/media/videos/workshop-01.mp4",
     width: 576,
     height: 1024,
-    poster: "sh-detail",
+    poster: "honda-lead-detail",
     alt: "Video thực tế tại xưởng 2K RACING 1",
   },
   {
@@ -248,10 +248,10 @@ export type GalleryItem = {
 };
 export const gallery: GalleryItem[] = [
   {
-    image: "vario-custom",
-    title: "Vario · Dấu ấn riêng",
+    image: "honda-ab-custom",
+    title: "Honda Air Blade · Dấu ấn riêng",
     category: "Xe hoàn thiện",
-    caption: "Diện mạo sắc nét, điểm nhấn ánh sáng đầy cá tính.",
+    caption: "Honda Air Blade với diện mạo sắc nét, điểm nhấn ánh sáng đầy cá tính.",
   },
   {
     image: "sh-street",
@@ -284,10 +284,10 @@ export const gallery: GalleryItem[] = [
     caption: "Cận cảnh cụm tay thắng và bình dầu trên xe.",
   },
   {
-    image: "sh-detail",
-    title: "Honda SH · Góc nhìn cận cảnh",
+    image: "honda-lead-detail",
+    title: "Honda LEAD · Góc nhìn cận cảnh",
     category: "Xe hoàn thiện",
-    caption: "Hình ảnh xe thực tế tại xưởng.",
+    caption: "Cận cảnh Honda LEAD thực tế tại xưởng 2K RACING.",
   },
 ];
 export const products = [
@@ -371,7 +371,7 @@ export const articles: Article[] = [
   },
   {
     title: "Nâng cấp bi cầu LED: sáng đúng, đẹp chất.",
-    image: "vario-custom",
+    image: "honda-ab-custom",
     label: "KINH NGHIỆM NÂNG CẤP",
     readTime: "5 phút đọc",
     intro:

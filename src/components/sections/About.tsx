@@ -5,11 +5,11 @@ import { SectionHeading } from "../ui/SectionHeading";
 export function About({ onVideo }: { onVideo: () => void }) {
   return (
     <section id="gioi-thieu" className="section-pad about-section">
-      <div className="site-container about-grid">
+      <div className="site-container about-grid" data-reveal>
         <div className="about-image">
           <img
-            src={imageUrl("sh-detail")}
-            alt="Cận cảnh xe Honda SH tại cửa hàng 2K RACING"
+            src={imageUrl("honda-lead-detail")}
+            alt="Cận cảnh xe Honda LEAD tại cửa hàng 2K RACING"
             width="700"
             height="850"
             loading="lazy"
@@ -19,7 +19,7 @@ export function About({ onVideo }: { onVideo: () => void }) {
             <strong>
               NƠI ĐAM MÊ
               <br />
-              GẶP SỰ TỈ MỈ.
+              GẶP SỰ TỈ MỈ
             </strong>
           </div>
           <button
@@ -33,8 +33,8 @@ export function About({ onVideo }: { onVideo: () => void }) {
         <div className="about-copy">
           <SectionHeading
             eyebrow="CÂU CHUYỆN 2K RACING"
-            title="CÙNG ĐAM MÊ."
-            accent="CÙNG CHẤT XE."
+            title="CÙNG ĐAM MÊ"
+            accent="CÙNG CHẤT XE"
           />
           <p>
             Với chúng tôi, mỗi chiếc xe đều có một câu chuyện. Và mỗi chủ xe đều

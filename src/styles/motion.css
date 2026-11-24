@@ -1,0 +1,154 @@
+/* Hero dùng chung timeline với chữ đua. Không có màn chờ chặn thao tác. */
+.cinematic-hero {
+  --intro-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --intro-poster-start: translate3d(60px, 22px, 0) rotate(2deg) scale(0.96);
+  --intro-poster-end: rotate(-4deg);
+}
+.cinematic-hero[data-intro="waiting"]::before,
+.cinematic-hero[data-intro="waiting"]
+  :is(
+    .showreel-track,
+    .showreel-topline,
+    .showreel-copy > *,
+    .showreel-poster,
+    .showreel-services,
+    .hero-media-dots,
+    .hero-media-footer,
+    .showreel-bottomline
+  ) {
+  opacity: 0;
+  visibility: hidden;
+}
+/* Theo yêu cầu animation: các hiệu ứng mới bật riêng khỏi reset reduced-motion. */
+.cinematic-hero[data-intro="racing"]::before {
+  animation: hero-livery-enter 850ms var(--intro-ease) both !important;
+}
+.cinematic-hero[data-intro="racing"] :is(.showreel-track, .showreel-topline) {
+  animation: hero-detail-enter 650ms ease 80ms both !important;
+}
+.cinematic-hero[data-intro="racing"] .showreel-eyebrow {
+  animation: hero-copy-enter 600ms var(--intro-ease) 80ms both !important;
+}
+.cinematic-hero[data-intro="racing"] h1 > span {
+  animation: hero-copy-enter 750ms var(--intro-ease) 140ms both !important;
+}
+.cinematic-hero[data-intro="racing"] h1 > em {
+  animation: hero-copy-enter 750ms var(--intro-ease) 230ms both !important;
+}
+.cinematic-hero[data-intro="racing"] .showreel-description {
+  animation: hero-copy-enter 650ms var(--intro-ease) 340ms both !important;
+}
+.cinematic-hero[data-intro="racing"] .showreel-actions {
+  animation: hero-copy-enter 650ms var(--intro-ease) 460ms both !important;
+}
+.cinematic-hero[data-intro="racing"] .showreel-poster {
+  animation: hero-poster-enter 950ms var(--intro-ease) 120ms both !important;
+}
+.cinematic-hero[data-intro="racing"] .showreel-services {
+  animation: hero-detail-enter 600ms ease 700ms both !important;
+}
+.cinematic-hero[data-intro="racing"]
+  :is(.hero-media-dots, .hero-media-footer, .showreel-bottomline) {
+  animation: hero-detail-enter 500ms ease 850ms both !important;
+}
+.cinematic-hero .showreel-actions:focus-within {
+  animation: none !important;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+@keyframes hero-livery-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(22vw, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes hero-copy-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(-24px, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes hero-detail-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes hero-poster-enter {
+  from {
+    opacity: 0;
+    transform: var(--intro-poster-start);
+  }
+  to {
+    opacity: 1;
+    transform: var(--intro-poster-end);
+  }
+}
+
+/* Reveal chỉ kích hoạt sau khi JS đăng ký observer; mặc định luôn đọc được. */
+[data-reveal][data-reveal-state="pending"] {
+  opacity: 0;
+}
+[data-reveal][data-reveal-state="visible"] {
+  opacity: 1;
+  animation: section-reveal-rise 650ms cubic-bezier(0.2, 0.75, 0.25, 1)
+    var(--reveal-delay, 0ms) both !important;
+  will-change: transform, opacity;
+}
+[data-reveal="fade"][data-reveal-state="visible"] {
+  animation-name: section-reveal-fade !important;
+  will-change: opacity;
+}
+:is(.service-card, .gallery-card, .product-card, .news-card):nth-child(4n + 2) {
+  --reveal-delay: 70ms;
+}
+:is(.service-card, .gallery-card, .product-card, .news-card):nth-child(4n + 3) {
+  --reveal-delay: 140ms;
+}
+:is(.service-card, .gallery-card, .product-card, .news-card):nth-child(4n + 4) {
+  --reveal-delay: 210ms;
+}
+.contact-card {
+  --reveal-delay: 120ms;
+}
+@keyframes section-reveal-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes section-reveal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (max-width: 767px) {
+  .cinematic-hero {
+    --intro-poster-start: scale(1.035);
+    --intro-poster-end: none;
+  }
+  :is(.service-card, .gallery-card, .product-card, .news-card):nth-child(odd) {
+    --reveal-delay: 0ms;
+  }
+  :is(.service-card, .gallery-card, .product-card, .news-card):nth-child(even) {
+    --reveal-delay: 80ms;
+  }
+}

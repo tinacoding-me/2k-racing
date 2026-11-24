@@ -41,6 +41,7 @@ src/
   styles/index.css     Tokens, các section, responsive, reduced motion
   styles/theme.css     Theme poster đen – trắng – đỏ – vàng cho toàn trang
   styles/hero.css      Hero toàn màn hình, header trong suốt/thu gọn, chữ dọc
+  styles/motion.css    Timeline mở hero và hiệu ứng hiện nội dung khi cuộn
   App.tsx              Ghép trang và điều phối modal
   main.tsx             React entry point
 ```
@@ -49,6 +50,7 @@ src/
 
 - Sửa địa chỉ, hotline, Zalo tại `src/data/content.ts`.
 - Ảnh hiển thị dùng `imageUrl('tên-file')`; thay ảnh cùng tên tại `public/media/images/` hoặc cập nhật dữ liệu.
+- Ảnh xe Honda Air Blade dùng tên `honda-ab-custom`; ảnh cận cảnh Honda LEAD dùng `honda-lead-detail` (có bản thường và bản hero). Script chuẩn bị media dùng cùng tên này.
 - Hai video lần lượt là `workshop-01.mp4` và `workshop-02.mp4`.
 - Đổi bảng màu `--ink`, `--red`, `--yellow` trong `src/styles/theme.css`.
 - Danh sách dịch vụ, nhóm tra cứu, bài viết và phụ tùng nằm trong `src/data/content.ts`.
@@ -62,6 +64,8 @@ src/
 - Hero theo bố cục Garage Showreel: nền đen, dải đỏ chéo, chữ “2K RACING” lớn nằm sau poster. Desktop dùng khung media dọc nghiêng nhẹ, giới hạn chiều cao 660px; mobile chuyển media thành nền với wordmark và điều khiển ở đáy. Ảnh hero dùng bản xuất riêng từ ảnh gốc tại `public/media/hero/`. Chữ thương hiệu dọc ở lề xuất hiện khi cuộn khỏi hero.
 - Các section theo thứ tự navbar: Trang chủ → Giới thiệu → Dịch vụ → Dự án → Phụ tùng → Kinh nghiệm → Liên hệ. Một danh sách `navigation` dùng chung cho menu desktop, mobile và xác định section đang xem.
 - Hero luân phiên ảnh/video, có nút trước/sau, chọn mục và tạm dừng. Tạm ngưng khi hero rời màn hình, chuyển tab hoặc mở modal; tự bỏ qua video không phát được.
+- Hero có timeline mở trang chung trong `useHeroIntro.ts`: mảng đỏ quét vào, poster trượt/nghiêng về vị trí, tiêu đề và CTA xuất hiện lần lượt. Chữ lớn chạy theo thứ tự G → N → I → C → A → R → K → 2, xuất phát cách nhau 90ms; chờ số 2 về vị trí mới kết thúc intro. Chờ font tối đa 1 giây; toàn cảnh chạy khoảng 1,8 giây, một lần mỗi lượt mở trang, không lặp khi đổi slide hay cuộn.
+- `useScrollReveal.ts` dùng chung một IntersectionObserver để hiện các khối khi cuộn tới, sau đó ngừng theo dõi. Các thẻ hiện so le; gallery mới sau khi lọc cũng được đăng ký. Nội dung vẫn có sẵn, ảnh tiếp tục dùng lazy loading; điều hướng bằng menu/bàn phím luôn hiện ngay nội dung đích. Intro và scroll reveal được bật riêng theo yêu cầu kể cả khi trình duyệt bật reduced motion.
 - Nút “Khám phá xưởng” mở video trong dialog; các nhãn dịch vụ cạnh poster dẫn đến section Dịch vụ. Hiệu ứng chuyển poster tôn trọng reduced motion.
 - Nút “Liên hệ ngay” trên navbar cuộn tới khối hotline và Zalo.
 - Card dịch vụ mở chi tiết; nút tư vấn dẫn về phần liên hệ.
