@@ -14,21 +14,22 @@ import { Contact } from "./components/sections/Contact";
 import { VideoPlayer } from "./components/sections/VideoPlayer";
 import { Modal } from "./components/ui/Modal";
 import { Icon } from "./components/ui/Icon";
-import { imageUrl } from "./data/content";
+import { imageUrl, workshopVideos } from "./data/content";
 import type { Article, Service, GalleryItem } from "./data/content";
 
 type ActiveModal =
   | { kind: "service"; data: Service }
   | { kind: "article"; data: Article }
   | { kind: "image"; data: GalleryItem }
-  | { kind: "video" }
+  | { kind: "video"; videoId: string }
   | null;
 export default function App() {
   const [modal, setModal] = useState<ActiveModal>(null);
   const heroMode = useHeroHeader();
   const mainRef = useRef<HTMLElement>(null);
   useScrollReveal(mainRef);
-  const openVideo = () => setModal({ kind: "video" });
+  const openVideo = () =>
+    setModal({ kind: "video", videoId: workshopVideos[0].id });
   const title =
     modal?.kind === "video" ? "CHUYỆN TẠI XƯỞNG" : modal?.data.title || "";
   return (
@@ -118,7 +119,9 @@ export default function App() {
               <figcaption>{modal.data.caption}</figcaption>
             </figure>
           )}
-          {modal.kind === "video" && <VideoPlayer />}
+          {modal.kind === "video" && (
+            <VideoPlayer initialVideoId={modal.videoId} />
+          )}
         </Modal>
       )}
     </>

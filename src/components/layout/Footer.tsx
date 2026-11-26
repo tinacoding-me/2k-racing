@@ -62,12 +62,15 @@ export function Footer() {
                     <path d="m10 9 6 3-6 3z" fill="#151515" />
                   </svg>
                 </button>
-                <button
-                  aria-label="Thông tin TikTok 2K RACING"
-                  onClick={() => setSocial("TikTok")}
+                <a
+                  href={shop.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="TikTok 2K RACING"
+                  title="TikTok 2K RACING"
                 >
-                  <b className="social-tiktok">♪</b>
-                </button>
+                  <Icon name="tiktok" size={22} />
+                </a>
                 <a
                   href={shop.zalo}
                   target="_blank"
@@ -158,6 +161,16 @@ export function Footer() {
         </a>
       </div>
       <div className="floating-social">
+        <a
+          className="floating-tiktok"
+          href={shop.tiktok}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Mở TikTok 2K RACING"
+          title="TikTok 2K RACING"
+        >
+          <Icon name="tiktok" size={25} />
+        </a>
         <a
           className="floating-facebook"
           href={shop.facebook}

@@ -1,40 +1,58 @@
 import { useState } from "react";
-import { imageUrl } from "../../data/content";
+import { imageUrl, workshopVideos } from "../../data/content";
 
-export function VideoPlayer() {
-  const [video, setVideo] = useState(1);
+export function VideoPlayer({ initialVideoId }: { initialVideoId?: string }) {
+  const [videoId, setVideoId] = useState(
+    initialVideoId ?? workshopVideos[0].id,
+  );
+  const [failed, setFailed] = useState(false);
+  const video =
+    workshopVideos.find((item) => item.id === videoId) ?? workshopVideos[0];
   return (
     <div className="video-content">
       <p className="muted mb-5">
-        Một góc nhìn thực tế từ 2K RACING. Bật âm thanh trên trình phát để nghe
-        video.
+        {video.description} Bật âm thanh trên trình phát để nghe video.
       </p>
       <video
-        key={video}
+        key={video.id}
         controls
         autoPlay
         muted
         playsInline
         preload="metadata"
-        poster={imageUrl("honda-lead-detail")}
+        poster={imageUrl(video.poster)}
+        width={video.width}
+        height={video.height}
+        aria-label={video.title}
+        onError={() => setFailed(true)}
       >
-        <source src={`/media/videos/workshop-0${video}.mp4`} type="video/mp4" />
-        Trình duyệt không hỗ trợ video.{" "}
-        <a href={`/media/videos/workshop-0${video}.mp4`}>Mở video</a>
+        <source src={video.src} type="video/mp4" />
+        Trình duyệt không hỗ trợ video. <a href={video.src}>Mở video</a>
       </video>
+      {failed && (
+        <p role="alert">
+          Không phát được video.{" "}
+          <a href={video.src} target="_blank" rel="noreferrer">
+            Mở video trực tiếp
+          </a>
+        </p>
+      )}
       <div
         className="gallery-filters mt-5"
         role="group"
         aria-label="Chọn video"
       >
-        {[1, 2].map((item) => (
+        {workshopVideos.map((item) => (
           <button
-            key={item}
-            aria-pressed={item === video}
-            className={item === video ? "selected" : ""}
-            onClick={() => setVideo(item)}
+            key={item.id}
+            aria-pressed={item.id === video.id}
+            className={item.id === video.id ? "selected" : ""}
+            onClick={() => {
+              setVideoId(item.id);
+              setFailed(false);
+            }}
           >
-            Video tại xưởng {item}
+            {item.title} · {item.durationLabel}
           </button>
         ))}
       </div>

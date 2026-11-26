@@ -1076,10 +1076,6 @@ ul {
   color: white;
   background: var(--red);
 }
-.social-tiktok {
-  font-size: 26px;
-  line-height: 1;
-}
 .zalo-word {
   font-size: 10px;
   font-weight: 800;
@@ -1264,6 +1260,13 @@ ul {
   background: #1877f2;
   border: 3px solid white;
 }
+.floating-tiktok {
+  background: #101010;
+  border: 3px solid white;
+}
+.floating-tiktok svg {
+  filter: drop-shadow(-1px -1px 0 #25f4ee) drop-shadow(1px 1px 0 #fe2c55);
+}
 .floating-chat {
   background: #252525;
   border: 1px solid #ffffff25;
@@ -1354,7 +1357,8 @@ ul {
 }
 .article-detail > img {
   width: 100%;
-  height: 270px;
+  height: auto;
+  object-fit: contain;
   border-radius: 3px;
 }
 .article-detail .news-meta {
@@ -1860,7 +1864,7 @@ ul {
     font-size: 21px;
   }
   .floating-social {
-    flex-direction: row;
+    flex-direction: column;
     bottom: 14px;
     right: 12px;
     gap: 9px;
@@ -1887,9 +1891,6 @@ ul {
   .modal-top .icon-button {
     width: 37px;
     height: 37px;
-  }
-  .article-detail > img {
-    height: 220px;
   }
   .article-detail .news-meta {
     font-size: 8px;

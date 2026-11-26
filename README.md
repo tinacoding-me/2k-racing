@@ -24,13 +24,13 @@ npm run format   # Định dạng mã nguồn bằng Prettier
 ## Cấu trúc
 
 ```text
-assets/originals/       Ảnh JPG gốc, giữ nguyên để chỉnh sửa sau này
+assets/originals/       Ảnh/video gốc, giữ nguyên để xử lý lại sau này
 public/media/
-  images/              12 ảnh WebP đã tối ưu, tên không dấu
+  images/              Ảnh WebP và poster video đã tối ưu, tên không dấu
   hero/                Ảnh hero/poster giữ độ phân giải gốc, WebP quality 94
-  videos/              2 video thực tế tại xưởng
+  videos/              3 video MP4 thực tế tại xưởng
 scripts/
-  prepare-media.py     Script tạo ảnh WebP (cần Python + Pillow)
+  prepare-media.py     Script tạo WebP/poster (Python + Pillow + OpenCV)
 src/
   components/
     layout/            Header, BrandRail, Footer, menu mobile, nút liên hệ
@@ -51,11 +51,12 @@ src/
 - Sửa địa chỉ, hotline, Zalo tại `src/data/content.ts`.
 - Ảnh hiển thị dùng `imageUrl('tên-file')`; thay ảnh cùng tên tại `public/media/images/` hoặc cập nhật dữ liệu.
 - Ảnh xe Honda Air Blade dùng tên `honda-ab-custom`; ảnh cận cảnh Honda LEAD dùng `honda-lead-detail` (có bản thường và bản hero). Script chuẩn bị media dùng cùng tên này.
-- Hai video lần lượt là `workshop-01.mp4` và `workshop-02.mp4`.
+- Ba video là `workshop-01.mp4`, `workshop-02.mp4` và `paint-detail.mp4`. Danh sách `workshopVideos` dùng chung cho hero và modal; cập nhật tại `src/data/content.ts`.
+- Bộ ảnh sơn mới dùng `paint-front-mask`, `paint-side-panel`; ảnh linh kiện dùng `upgrade-components`. Ảnh mới xuất hiện ngay trong nhóm đầu của Dự án; Honda Air Blade vẫn là ảnh đầu, Honda LEAD vẫn là ảnh cuối khi mở toàn bộ gallery.
 - Đổi bảng màu `--ink`, `--red`, `--yellow` trong `src/styles/theme.css`.
 - Danh sách dịch vụ, nhóm tra cứu, bài viết và phụ tùng nằm trong `src/data/content.ts`.
 - Slideshow hero dùng danh sách `heroMedia` trong `src/data/content.ts`: thêm/sắp xếp ảnh và video tại đây, `topic` chọn nhãn dịch vụ sáng lên cạnh poster. Ảnh giữ 6 giây; video tự phát không tiếng và chuyển khi kết thúc.
-- Hotline, Zalo, Facebook và địa chỉ dùng chung `shop` trong `src/data/content.ts`. Link chỉ đường và iframe Google Maps tự lấy địa chỉ này.
+- Hotline, Zalo, Facebook, TikTok và địa chỉ dùng chung `shop` trong `src/data/content.ts`. Link chỉ đường và iframe Google Maps tự lấy địa chỉ này.
 
 ## Các tương tác
 
@@ -69,17 +70,29 @@ src/
 - Nút “Khám phá xưởng” mở video trong dialog; các nhãn dịch vụ cạnh poster dẫn đến section Dịch vụ. Hiệu ứng chuyển poster tôn trọng reduced motion.
 - Nút “Liên hệ ngay” trên navbar cuộn tới khối hotline và Zalo.
 - Card dịch vụ mở chi tiết; nút tư vấn dẫn về phần liên hệ.
-- Gallery lọc theo danh mục, mở ảnh lớn, xem thêm/thu gọn.
+- Gallery ảnh lọc theo danh mục, mở ảnh lớn, xem thêm/thu gọn. Video sơn nằm trong hero và danh sách chọn video trong modal. Video hero chỉ được gắn vào DOM ở slide đang phát.
 - Các nút tư vấn phụ tùng dẫn về phần liên hệ.
-- Modal xem hai video và đọc đầy đủ bốn bài viết.
+- Modal chọn xem ba video, có điều khiển phát/âm thanh và thông báo khi không phát được; đọc đầy đủ bốn bài viết.
 - Khách muốn hẹn lịch gọi trực tiếp `0354836329` hoặc nhắn Zalo để trao đổi và thống nhất với cửa hàng. Không có form, luồng đặt lịch trực tuyến hay backend/database.
 - Nút hotline dùng `tel:0354836329`; Zalo dẫn tới `https://zalo.me/0354836329`. Facebook có link chính thức ở footer và nút tròn nổi cạnh Zalo. Google Maps có iframe và link chỉ đường đến 67 Đường số 5, Phước Long, Hồ Chí Minh.
 - Dialog hỗ trợ Escape, focus trap và trả focus về nút mở. Có skip link, focus visible và reduced motion.
 
 ## Nội dung cần cập nhật khi đưa vào sử dụng
 
-Facebook đã có URL chính thức trong `shop.facebook`. Chưa có URL chính thức của YouTube và TikTok; hai icon này hiện thông báo kênh đang cập nhật và dẫn khách sang Zalo. Thay bằng link chính thức trong `Footer.tsx` khi có.
+Facebook và TikTok đã có URL chính thức trong `shop.facebook` và `shop.tiktok`, dùng chung cho footer và các nút nổi. TikTok dẫn tới `https://www.tiktok.com/@_2k_racing?lang=vi-VN`, mở tab mới. Các nút nổi xếp dọc trên mobile để tránh chồng lên hotline. Chưa có URL chính thức của YouTube; icon YouTube hiện thông báo kênh đang cập nhật và dẫn khách sang Zalo. Thay bằng link chính thức trong `Footer.tsx` khi có.
 
 Không tự gán chứng nhận ISO, kinh nghiệm 10 năm, chính sách bảo hành, mức giá hay đánh giá khách hàng chưa được cung cấp. Bài viết là nội dung giới thiệu có thể biên tập lại.
 
 Ảnh stock không được sử dụng: ưu tiên toàn bộ hình ảnh/video thật đã cung cấp. Ảnh gốc giữ tại `assets/originals`, bản WebP được tạo bằng script. Chạy lại script nếu cần tái tạo; ảnh dùng cùng thư mục gốc hiện có sẽ được cập nhật.
+
+## Quy trình thêm media
+
+1. Đặt JPG mới vào `public/media/images/` và MP4 vào `public/media/videos/`, rồi khai báo tên nguồn/tên đầu ra không dấu trong `scripts/prepare-media.py`.
+2. Chạy xử lý riêng file mới (cần `Pillow`, `opencv-python`):
+
+   ```powershell
+   python -X utf8 scripts/prepare-media.py --only "bửng-sơn.jpg" "mặt-nạ-sơn.jpg" "linh-kiện-xe.jpg" "video-sơn.mp4"
+   ```
+
+3. Script giữ bản gốc trong `assets/originals/`, tạo ảnh WebP tối đa 1500×1800 cho nội dung và bản hero riêng. Poster video sơn lấy từ khung hình tại 0,5 giây; MP4 720×1280 khoảng 0,82 MB được giữ nguyên, không phóng nét hoặc nén lại mất chi tiết.
+4. Thêm mô tả, danh mục và vị trí trong `gallery`, `heroMedia` hoặc `workshopVideos`. Không suy đoán tên xe từ ảnh chi tiết chưa được xác nhận. Gallery dùng ảnh lazy loading; chỉ hero chủ động phát video không tiếng.

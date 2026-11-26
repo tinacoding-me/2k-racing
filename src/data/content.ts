@@ -14,6 +14,7 @@ export const shop = {
   zalo: `https://zalo.me/${phoneNumber}`,
   facebook:
     "https://www.facebook.com/people/2K-Racing-Decal-Qu%E1%BA%ADn-9/61566988531772/",
+  tiktok: "https://www.tiktok.com/@_2k_racing?lang=vi-VN",
   maps: `https://www.google.com/maps/search/?api=1&query=${mapQuery}`,
   mapEmbed: `https://www.google.com/maps?q=${mapQuery}&output=embed`,
 };
@@ -42,6 +43,53 @@ export type HeroMediaItem = {
     }
 );
 
+export type WorkshopVideo = {
+  id: string;
+  title: string;
+  description: string;
+  src: string;
+  poster: string;
+  width: number;
+  height: number;
+  durationLabel: string;
+};
+
+// Một danh sách dùng chung cho hero và trình phát trong modal.
+export const workshopVideos: WorkshopVideo[] = [
+  {
+    id: "workshop-1",
+    title: "Một vòng tại xưởng",
+    description: "Video thực tế tại xưởng 2K RACING 1",
+    src: "/media/videos/workshop-01.mp4",
+    poster: "honda-lead-detail",
+    width: 576,
+    height: 1024,
+    durationLabel: "0:46",
+  },
+  {
+    id: "workshop-2",
+    title: "Chăm xe tại 2K",
+    description: "Video thực tế tại xưởng 2K RACING 2",
+    src: "/media/videos/workshop-02.mp4",
+    poster: "brake-upgrade",
+    width: 368,
+    height: 654,
+    durationLabel: "0:20",
+  },
+  {
+    id: "paint-detail",
+    title: "Cận cảnh dàn áo sơn",
+    description:
+      "Một góc nhìn gần về bề mặt sơn và chi tiết dàn áo tại xưởng 2K RACING.",
+    src: "/media/videos/paint-detail.mp4",
+    poster: "paint-video-poster",
+    width: 720,
+    height: 1280,
+    durationLabel: "0:03",
+  },
+];
+const paintDetailVideo = workshopVideos[2];
+
 // Thứ tự slideshow hero; thêm hoặc thay media tại đây.
 export const heroMedia: HeroMediaItem[] = [
   {
@@ -52,14 +100,16 @@ export const heroMedia: HeroMediaItem[] = [
     alt: "Honda Air Blade với mặt nạ thể thao tại 2K RACING",
   },
   {
-    id: "workshop-1",
+    ...paintDetailVideo,
+    topic: "SƠN & DECAL",
+    kind: "video",
+    alt: paintDetailVideo.description,
+  },
+  {
+    ...workshopVideos[0],
     topic: "CHĂM SÓC",
     kind: "video",
-    src: "/media/videos/workshop-01.mp4",
-    width: 576,
-    height: 1024,
-    poster: "honda-lead-detail",
-    alt: "Video thực tế tại xưởng 2K RACING 1",
+    alt: workshopVideos[0].description,
   },
   {
     id: "sh",
@@ -76,21 +126,17 @@ export const heroMedia: HeroMediaItem[] = [
     alt: "Chi tiết phụ tùng và phuộc nâng cấp",
   },
   {
-    id: "workshop-2",
+    ...workshopVideos[1],
     topic: "CHĂM SÓC",
     kind: "video",
-    src: "/media/videos/workshop-02.mp4",
-    width: 368,
-    height: 654,
-    poster: "brake-upgrade",
-    alt: "Video thực tế tại xưởng 2K RACING 2",
+    alt: workshopVideos[1].description,
   },
   {
     id: "paint",
     topic: "SƠN & DECAL",
     kind: "image",
-    image: "paint-finish",
-    alt: "Chi tiết bề mặt sơn xe hoàn thiện",
+    image: "paint-front-mask",
+    alt: "Cận cảnh mặt nạ sơn màu bạc và đường viền tại xưởng 2K RACING",
   },
 ];
 export type Service = {
@@ -251,7 +297,29 @@ export const gallery: GalleryItem[] = [
     image: "honda-ab-custom",
     title: "Honda Air Blade · Dấu ấn riêng",
     category: "Xe hoàn thiện",
-    caption: "Honda Air Blade với diện mạo sắc nét, điểm nhấn ánh sáng đầy cá tính.",
+    caption:
+      "Honda Air Blade với diện mạo sắc nét, điểm nhấn ánh sáng đầy cá tính.",
+  },
+  {
+    image: "paint-front-mask",
+    title: "Mặt nạ · Sắc bạc tinh tế",
+    category: "Sơn & decal",
+    caption:
+      "Cận cảnh bề mặt sơn màu bạc và đường viền trên mặt nạ xe tại xưởng.",
+  },
+  {
+    image: "paint-side-panel",
+    title: "Bửng sơn · Chăm chút bề mặt",
+    category: "Sơn & decal",
+    caption:
+      "Chi tiết bửng sơn được kiểm tra trực tiếp dưới ánh sáng tại cửa hàng.",
+  },
+  {
+    image: "upgrade-components",
+    title: "Linh kiện · Sẵn sàng nâng cấp",
+    category: "Phụ tùng",
+    caption:
+      "Tay thắng, cụm phanh và các linh kiện thực tế tại xưởng 2K RACING.",
   },
   {
     image: "sh-street",
@@ -304,7 +372,7 @@ export const products = [
     description: "Chú trọng cảm giác và sự tương thích.",
   },
   {
-    image: "suspension-kit",
+    image: "upgrade-components",
     title: "Bộ phụ kiện nâng cấp",
     label: "HIỆU NĂNG",
     description: "Hoàn thiện cấu hình theo nhu cầu.",
@@ -327,7 +395,7 @@ export type Article = {
 export const articles: Article[] = [
   {
     title: "Một màu sơn mới. Một diện mạo khác.",
-    image: "paint-process",
+    image: "paint-front-mask",
     label: "SƠN & LÀM ĐẸP",
     readTime: "4 phút đọc",
     intro:

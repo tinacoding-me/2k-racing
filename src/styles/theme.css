@@ -415,6 +415,26 @@
   background: #fff;
 }
 
+/* Trình phát video trong modal giữ đúng tỷ lệ ảnh gốc. */
+.video-content video {
+  object-fit: contain;
+  height: min(56dvh, 520px);
+}
+.video-content .gallery-filters {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.video-content .gallery-filters button {
+  font-size: 14px;
+}
+.video-content [role="alert"] {
+  margin-top: 16px;
+  color: #a31620;
+}
+.video-content [role="alert"] a {
+  text-decoration: underline;
+}
+
 /* Phụ tùng: ảnh sáng, phần mô tả đen và nhãn phân loại vàng. */
 .parts-section {
   background: #fff;

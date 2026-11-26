@@ -66,6 +66,7 @@ export function Showcase({
                   width="600"
                   height="750"
                   loading="lazy"
+                  decoding="async"
                 />
                 <span className="gallery-zoom">
                   <Icon name="plus" size={22} />

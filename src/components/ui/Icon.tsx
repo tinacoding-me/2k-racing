@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 // Bộ icon SVG tự xây dựng, không dùng thư viện component.
 export type IconName =
   | "facebook"
+  | "tiktok"
   | "phone"
   | "calendar"
   | "menu"
@@ -28,6 +29,13 @@ export type IconName =
   | "mail"
   | "volume";
 const paths: Record<IconName, React.ReactNode> = {
+  tiktok: (
+    <path
+      d="M16 3c.4 2.3 1.7 3.7 4 4v3.2a8.3 8.3 0 0 1-4-1.3v6.6a6 6 0 1 1-5-5.9v3.3a2.8 2.8 0 1 0 1.8 2.6V3H16Z"
+      fill="currentColor"
+      stroke="none"
+    />
+  ),
   facebook: (
     <path
       d="M13.25 20.75v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.35c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4v2.4h-2.7v3.1h2.7v8z"
